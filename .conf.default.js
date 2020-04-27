@@ -17,8 +17,23 @@ module.exports = {
    */
   api: {
     /**
+     * Values that must be present options provided to this method
+     */
+    requiredOptsMembers: [
+      'endpoint',
+      'channel',
+      'subject',
+      'message'
+    ],
+
+    /**
      * API Gateway endpoint to use when testing
      */
-    testEndpoint: null
+    testEndpoint: null,
+
+    /**
+     * API key used for testing
+     */
+    testApiKey: null
   }
 };

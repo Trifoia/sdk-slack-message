@@ -8,6 +8,17 @@ describe('validate-opts', function() {
   it('should return success on valid minimum opts', async () => {
     const opts = {
       endpoint: 'some-endpoint',
+      apiKey: 'some-api-key',
+      channel: 'some-channel',
+      subject: 'some-subject',
+      message: 'some-message'
+    };
+    assert.strictEqual(validateOpts(opts), true);
+  });
+
+  it('should return success on valid minimum opts with a missing API key', async () => {
+    const opts = {
+      endpoint: 'some-endpoint',
       channel: 'some-channel',
       subject: 'some-subject',
       message: 'some-message'
