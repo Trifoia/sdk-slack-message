@@ -13,13 +13,12 @@
  */
 module.exports = {
   /**
-   * Misc app configurations
+   * API related configurations 
    */
-  app: {
+  api: {
     /**
-     * This text appears in VSCode Intellisense, and this value will be overwritten by the
-     * same value in the same category of the secret conf
+     * API Gateway endpoint to use when testing
      */
-    value: 'some-value'
+    testEndpoint: null
   }
 };
