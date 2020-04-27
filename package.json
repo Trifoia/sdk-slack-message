@@ -1,6 +1,6 @@
 {
   "name": "@trifoia/sdk-slack-message",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "SDK for connection to a proprietary automatic slack messaging endpoint",
   "main": "index.js",
   "scripts": {
