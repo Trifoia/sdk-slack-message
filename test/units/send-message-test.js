@@ -25,26 +25,56 @@ describe('send-message', function() {
       dataLogStream: `${(new Date()).toISOString()}-slack-message-sdk`
     };
     const res = await sendMessage(opts);
-    assert.strictEqual(res, '{"message":"Forbidden"}');
+    assert.strictEqual(res.message, 'Forbidden');
   });
 
-  itSlowly('should be able to send a message', async () => {
+  let dataLogStream, sequenceToken;
+  it('should be able to send a message', async () => {
     const opts = {
       endpoint: config.api.testEndpoint,
       apiKey: config.api.testApiKey,
       channel: 'test',
       subject: 'Slack Message SDK Test',
-      message: 'This is a tet from the slack message sdk',
+      message: 'This is a test from the slack message sdk `send-message-test: should be able to send a message`',
       iconEmoji: ':left_speech_bubble:',
       data: {
-        test: 'test',
+        test: 'send-message-test',
         num: 123,
         num2: 314532,
-        sdkData: 'this is from the sdk! Boo!'
+        sdkData: 'this is from the sdk! Boo!',
+        should: 'should be able to send a message'
       },
       dataLogStream: `${(new Date()).toISOString()}-slack-message-sdk`
     };
     const res = await sendMessage(opts);
-    assert.strictEqual(res, 'success');
+    assert.strictEqual(res.message, 'success');
+    assert.strictEqual(typeof res.logStreamName, 'string');
+    assert.strictEqual(typeof res.nextSequenceToken, 'string');
+    dataLogStream = res.logStreamName;
+    sequenceToken = res.nextSequenceToken;
+  });
+
+  it('should be able to send a message using the same log stream', async () => {
+    const opts = {
+      endpoint: config.api.testEndpoint,
+      apiKey: config.api.testApiKey,
+      channel: 'test',
+      subject: 'Slack Message SDK Test',
+      message: 'This is a test from the slack message sdk `send-message-test: should be able to send a message using the same log stream`',
+      iconEmoji: ':left_speech_bubble:',
+      data: {
+        test: 'send-message-test',
+        num: 123,
+        num2: 314532,
+        sdkData: 'this is from the sdk!',
+        should: 'should be able to send a message using the same log stream'
+      },
+      dataLogStream,
+      sequenceToken
+    };
+    const res = await sendMessage(opts);
+    assert.strictEqual(res.message, 'success');
+    assert.strictEqual(res.logStreamName, dataLogStream);
+    assert.strictEqual(typeof res.nextSequenceToken, 'string');
   });
 });

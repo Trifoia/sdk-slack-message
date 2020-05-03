@@ -60,6 +60,8 @@ describe('slack-message', function() {
       dataLogStream: `${(new Date()).toISOString()}-slack-message-sdk`
     };
     const res = await slackMessage(opts);
-    assert.strictEqual(res, 'success');
+    assert.strictEqual(res.message, 'success');
+    assert.strictEqual(typeof res.logStreamName, 'string');
+    assert.strictEqual(typeof res.nextSequenceToken, 'string');
   });
 });

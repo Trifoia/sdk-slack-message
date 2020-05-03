@@ -40,7 +40,8 @@ const messageOpts = {
     num2: 314532,
     sdkData: 'this is from the sdk! Boo!'
   },
-  dataLogStream: `${(new Date()).toISOString()}-slack-message-sdk`
+  dataLogStream: `${(new Date()).toISOString()}-slack-message-sdk`,
+  sequenceToken: 'log stream sequence token'
 }
 const res = await slackMessage(messageOpts);
 ```
